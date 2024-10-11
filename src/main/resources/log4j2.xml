@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--XML 문서의 버전과 인코딩 방식을 지정-->
+<configuration status="INFO">
+    <!--Log4j2의 구성 요소를 정의하는 태그, status="INFO"는 Log4j 자체의 로그 수준, INFO 이상일때 출력-->
+    <Appenders> <!--로그 출력 방법을 정의하는 섹션-->
+        <Console name="console" target="SYSTEM_OUT">
+            <!--콘솔에 로그를 출력하도록 정의, 콘솔 출력기(Appender)로, 이름은 console이며, 로그가 SYSTEM_OUT (표준 출력)으로 출력됨을 의미-->
+            <PatternLayout charset="UTF-8" pattern="%d{hh:mm:ss} %5p [%c] %m%n"/>
+            <!--로그 출력 형식을 지정,UTF-8로 인코딩-->
+            <!--%d{hh:mm:ss}: 로그 발생 시간을 시:분:초로 표시.
+            %5p: 로그 수준(INFO, WARN 등)을 5자리로 맞춰서 출력.
+            [%c]: 로그 발생 클래스 또는 카테고리 이름을 출력.
+            %m: 로그 메시지를 출력.
+            %n: 줄 바꿈 문자 추가.-->
+        </Console>
+    </Appenders>
+    <loggers> <!--특정 로거(Logger)의 설정을 정의하는 섹션-->
+        <logger name="org.springframework" level="INFO" additivity="false">
+            <!--이름이 **org.springframework**인 로거에 대한 설정입니다.
+            이 로거는 로그 수준이 INFO 이상일 때 로그를 출력하며,
+            **additivity="false"**는 부모 로거로 로그가 전파되지 않음을 의미-->
+            <appender-ref ref="console" /> <!-- console Appender를 사용해 로그를 출력-->
+        </logger>
+        <logger name="com.dosol" level="INFO" additivity="false">
+            <!-- 이름이 **com.example**인 로거에 대한 설정-->
+            <appender-ref ref="console" />
+        </logger>
+        <root level="INFO" additivity="false">
+            <!--루트 로거(root logger)는 모든 로거의 기본값을 정의.
+            이 경우 INFO 수준 이상의 모든 로그를 출력하며,
+            **additivity="false"**는 상위 로거로 로그가 전파되지 않음을 의미-->
+            <AppenderRef ref="console"/>
+        </root>
+    </loggers>
+</configuration>
