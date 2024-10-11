@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dosol.todocore.mapper.TodoMapper">
+    <select id="getTime" resultType="String">
+        select now()
+    </select>
+<!--    select 과 insert 구분-->
+
+    <insert id="insert">
+        insert into tbl_todo (title, dueDate, writer) values  ( #{title}, #{dueDate}, #{writer})
+    </insert>
+    <select id="getList" resultType="com.dosol.todocore.vo.TodoVO">
+        select * from tbl_todo
+    </select>
+</mapper>
