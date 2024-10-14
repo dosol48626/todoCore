@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">Todo Modify Page</h5>
-      <form action="/todo/modify" method="post">
+      <form>
       <div class="input-group mb-3">
         <label class="input-grout-text">Tno</label>
         <input class="form-control" type="text" name="tno" value="${dto.tno}" readonly>
@@ -21,15 +21,15 @@
       </div>
       <div class="input-group mb-3">
         <label class="input-grout-text">DueDate</label>
-        <input class="form-control" type="date" name="title" value="${dto.dueDate}">
+        <input class="form-control" type="date" name="dueDate" value="${dto.dueDate}">
       </div>
       <div class="input-group mb-3">
         <label class="input-grout-text">Writer</label>
-        <input class="form-control" type="text" name="title" value="${dto.writer}" readonly>
+        <input class="form-control" type="text" name="writer" value="${dto.writer}" readonly>
       </div>
       <div class="form-check">
         <label class="form-check-label">Finished</label>
-        <input class="form-check-input" type="checkbox" ${dto.finished?"checked":""}>
+        <input class="form-check-input" name="finished" type="checkbox" ${dto.finished?"checked":""}>
       </div>
 
       <div class="my-4">
@@ -42,10 +42,27 @@
       </form>
     </div>
     <script>
+      const formObj = document.querySelector("form") //변수할당
+
       document.querySelector(".btn-primary").addEventListener("click", function (e) {
-        self.location = "/todo/modify?tno="+${dto.tno};
+        e.preventDefault();
+        e.stopPropagation();
+        formObj.action = "/todo/modify";
+        formObj.method = "POST";
+        formObj.submit();
       }, false);
+
+      document.querySelector(".btn-danger").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        formObj.action = "/todo/remove";
+        formObj.method = "POST";
+        formObj.submit();
+      }, false);
+
       document.querySelector(".btn-secondary").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         self.location = "/todo/list";
       }, false)
     </script>

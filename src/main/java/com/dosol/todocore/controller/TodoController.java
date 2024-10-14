@@ -60,4 +60,19 @@ public class TodoController {
         TodoDTO todoDTO = todoService.getOne(tno);
         model.addAttribute("dto", todoDTO);
     }
+
+    @PostMapping ("/remove")
+    public String remove(TodoDTO todoDTO, RedirectAttributes redirectAttributes) {
+        log.info("remove");
+        todoService.remove(todoDTO.getTno());
+        return "redirect:/todo/list";
+    }
+
+    @PostMapping("/modify")
+    public String modify(TodoDTO todoDTO, RedirectAttributes redirectAttributes) {
+        log.info("modify()"+todoDTO);
+        todoService.modify(todoDTO);
+        redirectAttributes.addAttribute("tno", todoDTO.getTno());
+        return "redirect:/todo/read";
+    }
 }
