@@ -25,6 +25,10 @@
             <!-- 이름이 **com.example**인 로거에 대한 설정-->
             <appender-ref ref="console" />
         </logger>
+        <logger name="com.dosol.mapper" level="INFO" additivity="false">
+            <!-- 이름이 **com.example**인 로거에 대한 설정-->
+            <appender-ref ref="console" />
+        </logger>
         <root level="INFO" additivity="false">
             <!--루트 로거(root logger)는 모든 로거의 기본값을 정의.
             이 경우 INFO 수준 이상의 모든 로그를 출력하며,

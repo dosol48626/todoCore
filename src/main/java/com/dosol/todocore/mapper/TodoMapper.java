@@ -9,4 +9,5 @@ public interface TodoMapper {
     String getTime();
     void insert(TodoVO todoVO);
     List<TodoVO> getList();
+    TodoVO selectOne(int tno);
 }
