@@ -105,7 +105,8 @@
                         return
                     }
                     const num = target.getAttribute("data-num")
-                    self.location = `/todo/list?page=\${num}`
+                    //self.location = `/todo/list?page=\${num}&\${pageRequestDTO.link}`
+                    self.location=`/todo/list?page=\${num}`
                 },false)
             </script>
 
