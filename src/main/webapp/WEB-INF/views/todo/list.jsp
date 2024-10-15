@@ -63,7 +63,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${todoList}" var="dto">
+                <c:forEach items="${responseDTO.dtoList}" var="dto">
                     <tr>
                         <th scope="row">${dto.tno}</th>
                         <td><a href="/todo/read?tno=${dto.tno}">${dto.title}</a></td>
@@ -74,6 +74,43 @@
                 </c:forEach>
                 </tbody>
             </table>
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <c:if test="${responseDTO.prev}">
+                        <li class="page-item">
+                            <a class="page-link" data-num="${responseDTO.start-1}">Previous</a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+                        <li class="page-item ${responseDTO.page == num? "active":""}">
+                            <a class="page-link" data-num="${num}">${num}</a>
+                        </li>
+                    </c:forEach>
+
+                    <c:if test="${responseDTO.next}">
+                        <li class="page-item">
+                            <a class="page-link" data-num="${responseDTO.end+1}">Next</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+
+            <script>
+                document.querySelector(".pagination").addEventListener("click", function (e) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    const target = e.target
+
+                    if(target.tagName !== 'A') {
+                        return
+                    }
+                    const num = target.getAttribute("data-num")
+                    self.location = `/todo/list?page=\${num}`
+                },false)
+            </script>
+
         </div>
     </div>
 </div>

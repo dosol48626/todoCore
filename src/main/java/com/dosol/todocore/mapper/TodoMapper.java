@@ -1,5 +1,7 @@
 package com.dosol.todocore.mapper;
 
+import com.dosol.todocore.dto.PageRequestDTO;
+import com.dosol.todocore.dto.PageResponseDTO;
 import com.dosol.todocore.dto.TodoDTO;
 import com.dosol.todocore.vo.TodoVO;
 
@@ -12,4 +14,8 @@ public interface TodoMapper {
     TodoVO selectOne(int tno);
     void delete(Long tno);
     void update(TodoVO todoVO);
+
+    int getCount(PageRequestDTO pageRequestDTO);
+    List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+
 }

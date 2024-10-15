@@ -1,5 +1,7 @@
 package com.dosol.todocore.controller;
 
+import com.dosol.todocore.dto.PageRequestDTO;
+import com.dosol.todocore.dto.PageResponseDTO;
 import com.dosol.todocore.dto.TodoDTO;
 import com.dosol.todocore.service.TodoService;
 import jakarta.validation.Valid;
@@ -25,12 +27,23 @@ public class TodoController {
 //    @Autowired
     private final TodoService todoService;
 
-    @GetMapping("/list")
+    //@GetMapping("/list")
     public void list(Model model) {
         log.info("list"); //  todo/list
         List<TodoDTO> todoList = todoService.getAll();
         model.addAttribute("todoList", todoList);
     }
+
+    @GetMapping("/list")
+    public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+        log.info("list");
+        if (bindingResult.hasErrors()) {
+            pageRequestDTO = pageRequestDTO.builder().build();
+        }
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
+        model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+    }
+
     @GetMapping("/register")
     public void registerGET() {
         log.info("GET todo register.......");
@@ -75,4 +88,5 @@ public class TodoController {
         redirectAttributes.addAttribute("tno", todoDTO.getTno());
         return "redirect:/todo/read";
     }
+
 }
