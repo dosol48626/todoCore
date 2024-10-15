@@ -63,7 +63,8 @@
       document.querySelector(".btn-secondary").addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        self.location = "/todo/list";
+        self.location = `/todo/list?${pageRequestDTO.link}`;
+        //self.location = "/todo/list";
       }, false)
     </script>
   </div>

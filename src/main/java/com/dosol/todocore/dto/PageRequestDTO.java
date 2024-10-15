@@ -28,4 +28,13 @@ public class PageRequestDTO {
     public int getSkip() {
         return (page - 1) * size;
     }
+
+    public String getLink(){
+        //부를때 그냥 .Link하면 써짐
+        StringBuilder builder = new StringBuilder();
+        builder.append("page=" + this.page);
+        builder.append("&size=" + this.size);
+
+        return builder.toString();
+    }
 }

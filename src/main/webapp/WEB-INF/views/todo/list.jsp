@@ -9,42 +9,38 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--    <meta charset="utf-8">--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1">--%>
-<%--    <title>Bootstrap demo</title>--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<div class="container-fluid">--%>
-<%--    <div class="row">--%>
-<%--        <nav class="navbar navbar-expand-lg bg-body-tertiary">--%>
-<%--            <div class="container-fluid">--%>
-<%--                <a class="navbar-brand" href="#">Navbar</a>--%>
-<%--                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--                    <span class="navbar-toggler-icon"></span>--%>
-<%--                </button>--%>
-<%--                <div class="collapse navbar-collapse" id="navbarNav">--%>
-<%--                    <ul class="navbar-nav">--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link active" aria-current="page" href="#">Home</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="#">Features</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="#">Pricing</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </nav>--%>
-<%--    </div>--%>
 <%@include file="../includes/header.jsp"%>
+
+<div class="row-content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Search</h5>
+
+            <form action="/todo/list" method="get">
+                <input type="hidden" name="size">
+                <div class="mb-3">
+                    <input type="checkbox" name="finished">완료여부
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" name="types" value="t">제목
+                    <input type="checkbox" name="types" value="w">작성자
+                    <input type="text"  name="keyword" class="form-control">
+                </div>
+                <div class="input-group mb-3 dueDateDiv">
+                    <input type="date" name="from" class="form-control">
+                    <input type="date" name="to" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="float-end">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                        <button class="btn btn-info clearBtn" type="reset">Clear</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 <div class="row-content">
     <div class="card">
         <div class="card-header">
@@ -66,7 +62,7 @@
                 <c:forEach items="${responseDTO.dtoList}" var="dto">
                     <tr>
                         <th scope="row">${dto.tno}</th>
-                        <td><a href="/todo/read?tno=${dto.tno}">${dto.title}</a></td>
+                        <td><a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}">${dto.title}</a></td>
                         <td>${dto.writer}</td>
                         <td>${dto.dueDate}</td>
                         <td>${dto.finished}</td>
