@@ -96,32 +96,24 @@
             </nav>
 
             <script>
-                document.querySelector(".pagination").addEventListener("click", function (e) {
+
+                document.querySelector(".pagination").addEventListener("click", function (e){
                     e.preventDefault()
                     e.stopPropagation()
-                    const target = e.target
-
-                    if(target.tagName !== 'A') {
+                    const target=e.target
+                    if(target.tagName !== 'A'){
                         return
                     }
-                    const num = target.getAttribute("data-num")
-                    //self.location = `/todo/list?page=\${num}&\${pageRequestDTO.link}`
-                    self.location=`/todo/list?page=\${num}`
-                },false)
+                    const num=target.getAttribute("data-num")
+                    const formObj=document.querySelector("form");
+                    formObj.innerHTML+=`<input type='hidden' name='page' value='\${num}'>`
+                    formObj.submit()
+                    //    self.location=`/todo/list?page=\${num}&\${pageRequestDTO.link}`
+                })
             </script>
 
         </div>
     </div>
 </div>
 <%@include file="../includes/footer.jsp"%>
-<%--    <div class="row footer">--%>
-<%--        <div class="row fixed-bottom" style="z-index: -100">--%>
-<%--            <footer class="py-1 my-1">--%>
-<%--                <p class="text-center text-muted">Footer</p>--%>
-<%--            </footer>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>--%>
-<%--</body>--%>
-<%--</html>--%>
+
