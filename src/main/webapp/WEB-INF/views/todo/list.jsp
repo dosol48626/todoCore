@@ -36,6 +36,7 @@
                     <div class="float-end">
                         <button class="btn btn-primary" type="submit">Search</button>
                         <button class="btn btn-info clearBtn" type="reset">Clear</button>
+<%--                        <input type="reset" value="Clear">--%>
                     </div>
                 </div>
             </form>
@@ -104,11 +105,14 @@
                     if(target.tagName !== 'A'){
                         return
                     }
-                    const num=target.getAttribute("data-num")
-                    const formObj=document.querySelector("form");
+                    const num=target.getAttribute("data-num") //페이지 num을 받았고,
+                    const formObj=document.querySelector("form"); // form태그에서 formObj받고
                     formObj.innerHTML+=`<input type='hidden' name='page' value='\${num}'>`
+                    // 이 폼에다가 페이지를 덧붙이는거지. 그리고 서브밋하면 검색어가 붙어서 나옴
                     formObj.submit()
                     //    self.location=`/todo/list?page=\${num}&\${pageRequestDTO.link}`
+                    //crear 할때는 그냥 todo/list로 보내버리면 되겠네.
+                    
                 })
             </script>
 

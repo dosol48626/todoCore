@@ -47,7 +47,7 @@
       document.querySelector(".btn-primary").addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        formObj.action = "/todo/modify";
+        formObj.action = `/todo/modify?${pageRequestDTO.link}`;
         formObj.method = "POST";
         formObj.submit();
       }, false);
